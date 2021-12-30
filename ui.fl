@@ -1,0 +1,314 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1,0104 
+header_name {.H} 
+code_name {.C}
+decl {\#include <fjtag.H>} {public
+} 
+
+Function {make_window()} {open
+} {
+  Fl_Window main_w {
+    label FJtag
+    callback {fjtag_exit();} open
+    xywh {137 166 695 443} type Double resizable visible
+  } {
+    Fl_Menu_Bar {} {open
+      xywh {0 0 694 21} color 47
+    } {
+      submenu {} {
+        label File
+        xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+      } {
+        menuitem {} {
+          label {Load chain}
+          callback open_flash_image
+          xywh {0 0 100 20} shortcut 0x8006f labeltype ENGRAVED_LABEL
+        }
+        menuitem {} {
+          label {Save chain}
+          callback save_flash_image
+          xywh {10 10 100 20} shortcut 0x80073 labeltype ENGRAVED_LABEL divider
+        }
+        menuitem {} {
+          label Preferences
+          callback preferences
+          xywh {10 10 100 20} shortcut 0x80070 labeltype ENGRAVED_LABEL divider
+        }
+        menuitem {} {
+          label Exit
+          callback {fjtag_exit();}
+          xywh {0 0 100 20} shortcut 0x80078 labeltype ENGRAVED_LABEL
+        }
+      }
+      submenu {} {
+        label Jtag open
+        xywh {10 10 100 20} labeltype EMBOSSED_LABEL
+      } {
+        menuitem {} {
+          label {Check cable}
+          callback {log("Checking cable ...");
+fjtag.setup_cable((int)(cable_type_ch->mvalue())->user_data(),port_select_ch->text());
+fjtag.update_status();}
+          xywh {20 20 100 20} shortcut 0x80063 labeltype ENGRAVED_LABEL
+        }
+        menuitem {} {
+          label {Autodetect chain}
+          callback autodetect_chain
+          xywh {20 20 100 20} shortcut 0x80064 labeltype ENGRAVED_LABEL
+        }
+        menuitem {} {
+          label {Autodetect flash}
+          callback autodetect_flash
+          xywh {30 30 100 20} shortcut 0x80066 labeltype ENGRAVED_LABEL
+        }
+        menuitem {} {
+          label {Set netlist}
+          xywh {40 40 100 20} shortcut 0x8006e labeltype ENGRAVED_LABEL
+        }
+        menuitem {} {
+          label {Test interconnection}
+          xywh {50 50 100 20} shortcut 0x80074 labeltype ENGRAVED_LABEL
+        }
+        submenu {} {
+          label Instructions open
+          xywh {0 0 100 20} labeltype ENGRAVED_LABEL
+        } {
+          menuitem {} {
+            label IDCODE
+            callback {log(">instruction IDCODE");
+fjtag.run("instruction IDCODE");
+fjtag.run("shift ir");
+fjtag.run("shift dr");
+fjtag.run("dr");}
+            xywh {70 70 100 20} shortcut 0x49 labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label USERCODE
+            callback {log(">instruction USERCODE");
+fjtag.run("instruction USERCODE");
+fjtag.run("shift ir");
+fjtag.run("shift dr");
+fjtag.run("dr");}
+            xywh {110 110 100 20} shortcut 0x55 labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label EXTEST
+            callback {log(">instruction EXTEST");
+fjtag.run("instruction EXTEST");
+fjtag.run("shift ir");
+fjtag.run("shift dr");
+fjtag.run("dr");}
+            xywh {80 80 100 20} shortcut 0x45 labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {SAMPLE/PRELOAD}
+            callback {log(">instruction SAMPLE/PRELOAD");
+fjtag.run("instruction SAMPLE/PRELOAD");
+fjtag.run("shift ir");
+fjtag.run("shift dr");
+fjtag.run("dr");}
+            xywh {90 90 100 20} shortcut 0x53 labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label CAPTURE
+            callback {log(">instruction CAPTURE");
+fjtag.run("instruction CAPTURE");
+fjtag.run("shift ir");
+fjtag.run("shift dr");
+fjtag.run("dr");}
+            xywh {100 100 100 20} shortcut 0x43 labeltype ENGRAVED_LABEL
+          }
+        }
+        submenu {} {
+          label Commands open
+          xywh {0 0 100 20} labeltype ENGRAVED_LABEL
+        } {
+          menuitem {} {
+            label {Shift IR}
+            callback {log(">shift ir");
+fjtag.run("shift ir");}
+            xywh {80 80 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Shift DR}
+            callback {log(">shift dr");
+fjtag.run("shift dr");}
+            xywh {90 90 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {View DR (out)}
+            callback {log(">dr out");
+fjtag.run("dr out");}
+            xywh {110 110 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {View DR (in)}
+            callback {log(">dr in");
+fjtag.run("dr in");}
+            xywh {120 120 100 20} labeltype ENGRAVED_LABEL
+          }
+        }
+      }
+      submenu {} {
+        label Tools open
+        xywh {20 20 100 20} labeltype EMBOSSED_LABEL
+      } {
+        submenu {} {
+          label Flash open
+          xywh {0 0 100 20} labeltype ENGRAVED_LABEL
+        } {
+          menuitem {} {
+            label {Blank check flash}
+            xywh {40 40 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Erase entire flash}
+            xywh {40 40 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Erase flash sector}
+            xywh {50 50 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Read flash}
+            xywh {50 50 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Program flash}
+            xywh {30 30 100 20} labeltype ENGRAVED_LABEL
+          }
+          menuitem {} {
+            label {Verify flash}
+            xywh {30 30 100 20} labeltype ENGRAVED_LABEL
+          }
+        }
+        submenu {} {
+          label Programmer open
+          xywh {0 0 100 20} labeltype ENGRAVED_LABEL deactivate
+        } {}
+        submenu {} {
+          label CPU open
+          xywh {10 10 100 20} labeltype ENGRAVED_LABEL deactivate divider
+        } {}
+        menuitem {} {
+          label {Clear message browser}
+          callback {log_br->clear();}
+          xywh {30 30 100 20} labeltype ENGRAVED_LABEL
+        }
+      }
+      menuitem {} {
+        label {Autodetect chain}
+        callback autodetect_chain
+        xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+      }
+      menuitem {} {
+        label {Autodetect flash}
+        callback autodetect_flash
+        xywh {10 10 100 20} labeltype EMBOSSED_LABEL
+      }
+      menuitem {} {
+        label {                                             }
+        xywh {0 0 100 20} deactivate
+      }
+      submenu {} {
+        label Help
+        xywh {0 0 100 20} labeltype EMBOSSED_LABEL
+      } {
+        menuitem {} {
+          label About
+          xywh {0 0 100 20} labeltype ENGRAVED_LABEL
+        }
+      }
+    }
+    Fl_Output status_bar {
+      tooltip {Status Bar} xywh {0 421 694 21} box THIN_UP_BOX color 47 align 0 textfont 8 textsize 15 textcolor 136 resizable
+    }
+    Fl_Browser parts_br {
+      label Parts
+      callback part_br_cb
+      xywh {1 40 215 241} type Multi color 47 selection_color 92 labeltype EMBOSSED_LABEL labelcolor 60 align 1 textfont 8 textsize 17
+    }
+    Fl_Browser pins_br {
+      label Pins
+      callback pins_br_cb selected
+      xywh {216 40 186 241} type Multi color 47 selection_color 92 labeltype EMBOSSED_LABEL labelcolor 60 align 1 textfont 8 textsize 13
+    }
+    Fl_Browser bus_br {
+      label Bus
+      xywh {389 40 72 241} type Multi color 47 selection_color 92 labeltype EMBOSSED_LABEL labelcolor 60 align 1 textfont 8 textsize 15 hide deactivate
+    }
+    Fl_Browser flash_br {
+      label {Flash chip}
+      xywh {402 40 291 241} color 47 selection_color 92 labeltype EMBOSSED_LABEL labelcolor 60 align 1 textfont 8 textsize 12
+    }
+    Fl_Browser log_br {
+      tooltip {Messages area} xywh {1 281 692 120} type Hold color 47 selection_color 92 labeltype EMBOSSED_LABEL labelcolor 60 align 1 textfont 8 textsize 15
+    }
+    Fl_Input cmd_i {
+      callback {if (cmd_i->size()) {
+ log(">%s", cmd_i->value());
+ fjtag.run(cmd_i->value());
+ fjtag.update_status();
+ cmd_i->value(0);
+}}
+      tooltip {Command Input (Obsolete)} xywh {0 401 694 21} color 139 selection_color 47 when 10 textfont 1 textcolor 93
+      code0 {cmd_i->cursor_color(cmd_i->textcolor());}
+      class Fl_History_Input
+    }
+  }
+  Fl_Window prefs_w {
+    label Preferences open
+    xywh {411 348 323 189} type Double hide modal
+  } {
+    Fl_Button {} {
+      label Ok
+      callback prefs_ok
+      xywh {28 145 102 22} color 47 selection_color 40 labeltype ENGRAVED_LABEL labelfont 13 labelcolor 32
+    }
+    Fl_Button {} {
+      label Cancel
+      callback {prefs_w->hide();}
+      xywh {191 145 102 22} color 47 selection_color 40 labeltype ENGRAVED_LABEL labelfont 13 labelcolor 32
+    }
+    Fl_Choice cable_type_ch {
+      label {Cable type} open
+      xywh {19 36 284 23} down_box BORDER_BOX color 43 labeltype EMBOSSED_LABEL labelfont 13 align 1
+    } {
+      menuitem {} {
+        label None
+        user_data 0
+        xywh {0 0 100 20} labelfont 14
+      }
+      menuitem {} {
+        label {Altera Byteblaster(II/MV)}
+        user_data 1
+        xywh {10 10 100 20} labelfont 14
+      }
+    }
+    Fl_Choice port_select_ch {
+      label {Port select} open
+      xywh {19 92 284 23} down_box BORDER_BOX color 43 labeltype EMBOSSED_LABEL labelfont 13 align 1
+    } {
+      menuitem {} {
+        label None
+        xywh {10 10 100 20} labelfont 14
+      }
+      menuitem {} {
+        label {/dev/parport0}
+        xywh {20 20 100 20} labelfont 14
+      }
+      menuitem {} {
+        label {/dev/parport1}
+        xywh {20 20 100 20} labelfont 14
+      }
+      menuitem {} {
+        label {/dev/parport2}
+        xywh {30 30 100 20} labelfont 14
+      }
+      menuitem {} {
+        label {/dev/parport3}
+        xywh {40 40 100 20} labelfont 14
+      }
+    }
+  }
+} 

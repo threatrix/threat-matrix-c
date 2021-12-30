@@ -1,128 +1,81 @@
-DoxyGate 1.2
-======================================================================
 
-DoxyGate is a cross-platform GUI frontend for Doxygen 
-(http://www.doxygen.org), a famous documentation generator. DoxyGate
-provides easy-to-use modern interface and allows quickly and simply
-edit Doxygen projects, configure tools and executing building process.
+                                    FJtag
 
-Official web site of the project:
-http://doxygate.site90.com
+	*** About
 
+ FJtag is written/inspired/stolen from original sourceforge jtag project,
+URL is <http://openwince.sourceforge.net/jtag/>.
 
+ 	*** AIMS
 
-LICENSING
+ - provide Jtag UI for Linux
+ - try to make open/clean c++ jtag paltform
+ - provide circuit/pcb verification
+ - support popular cpu's (nios/arm/etc)
+ - add script engine (JAM ?)
 
-DoxyGate is free software and is distributed according to GPL license.
+	*** INSTALL-source
 
+ Requriments : fltk-1.1.4 with xft support enabled
 
+ - edit Makefile
+ - issue make
+ - goto INSTALL-binary
 
-INSTALLING DoxyGate
+	*** INSTALL-binary
 
-On Windows, if you want to install the precompiled binary
-packages, simply launch the package and follow the instructions in the
-installation wizard.
+ Requriments :
 
-On Linux, you have to install from a source package (a .tar.gz, .tar.bz2, or .zip file).
-There are following installation steps:
+# ldd fjtag-bin/fjtag
+        libfltk.so.1.1 => /usr/local/lib/libfltk.so.1.1 (0x4002d000)
+        libX11.so.6 => /usr/X11R6/lib/libX11.so.6 (0x400a7000)
+        libXpm.so.4 => /usr/X11R6/lib/libXpm.so.4 (0x4016f000)
+        libXft.so.2 => /usr/lib/libXft.so.2 (0x4017e000)
+        libXext.so.6 => /usr/X11R6/lib/libXext.so.6 (0x40190000)
+        libXrender.so.1 => /usr/X11R6/lib/libXrender.so.1 (0x4019e000)
+        libfreetype.so.6 => /usr/lib/libfreetype.so.6 (0x401a6000)
+        libfontconfig.so.1 => /usr/X11R6/lib/libfontconfig.so.1 (0x4020c000)
+        libexpat.so.0 => /usr/lib/libexpat.so.0 (0x40233000)
+        libz.so.1 => /usr/lib/libz.so.1 (0x40252000)
+        libpthread.so.0 => /lib/libpthread.so.0 (0x4025f000)
+        libstdc++.so.6 => /usr/lib/libstdc++.so.6 (0x402b0000)
+        libm.so.6 => /lib/libm.so.6 (0x40375000)
+        libgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x40399000)
+        libc.so.6 => /lib/libc.so.6 (0x403a1000)
+        libdl.so.2 => /lib/libdl.so.2 (0x404d7000)
+        /lib/ld-linux.so.2 => /lib/ld-linux.so.2 (0x40000000)
 
-1. Make sure that you have Qt 4.4.x installed on your system.
-(note: DoxyGate could be also built with high probability with Qt 4.3.x,
-althought there are no warranties)
+ - untar database.tar.bz2 to /usr/local/share/jtag
+ - copy fjtag to /usr/local/bin
+ - test it
 
-2. Make sure that you have C++ compiler installed which fits Qt 4.4.x
-requirements.
+	*** STATUS
 
-3. Unpack the archive into a directory.
+ 2004-05-06
+	v0.0 - alfa version aka "Protoplazma"
+	maybe usable for me only, sorry ;)
 
-4. Go into this directory and type 'qmake'. This should call QMake 
-tool which creates Makefiles.
+	*** TODO
 
-5. Depending on which compiler do you use, type 'make' (for GCC),
-or 'nmake' (for MSVC), or 'mingw-make' (for minGW). Build process should
-be started.
+ - see corresponding file
 
-6. After successful build, type 'make install'. This will copy DoxyGate
-binaries to your system. By default, it is /usr/bin directory 
-(on Linux), but you can change it by editing 'doxygate.pro' file
-('target.path' entry). Please use qmake again before doing installation
-in order to regenerate make files if you have changed 'doxygate.pro'.
+	*** Where to get
 
-NOTE: Probably you should have administrative access to the system in order to
-fulfill the installation.
+ http://fjtag.sourceforge.net
+ http://sourceforge.net/projects/fjtag
 
+	*** Author
 
+ Rus V. Brushkoff <brushkoff@users.sourceforge.net>
 
-SUPPORTED PLATFORMS AND TOOLS
+	*** License
 
-For this release, the following platforms have been tested:
+ GPL, see COPYING file
 
-openSuse Linux 11.0
-Microsoft Windows XP SP 2
+	*** Support
 
-Building DoxyGate from sources has been tested with:
-
-gcc 4.2.1
-minGW gcc 3.4.5 
-Qt Creator
-Microsoft Visual Studio 2003
-Microsoft Visual Studio 2005
-
-The following Qt releases has been used:
-Qt 4.3.4 OpenSource (should work, could cause some build issues)
-Qt 4.4.0 OpenSource
-Qt 4.4.1 OpenSource
-Qt 4.4.3 OpenSource
-
-
-
-RUNTIME TOOLS REQUIREMENTS
-
-DoxyGate 1.2 definitly works with Doxygen 1.5.7.1. As there are possibly 
-changes in configuration file for the most recent (or older) versions
-of Doxygen, it is strictly recommended to visit DoxyGate web site and
-make sure that a corresponding version of the software available in
-order to work with Doxygen and other tools you have.
+ Not very good for now, simple email me.
 
 
-
-HOW TO REPORT A BUG
-
-If you think you have found a bug in DoxyGate, we would like to hear about
-it so that we can fix it. Before reporting a bug, please check
-bug tracker on http://www.sourceforge.org/projects/doxygate 
-to see if the the issue is already known.
-
-Always include the following information in your bug report: the name
-and version number of your compiler; the name and version number of
-your operating system; the version of Qt you are using, and what
-configure options it was compiled with; the version of Doxygen installed.
- 
-Please submit the bug report using the Bug Tracker on the DoxyGate website:
-
-http://www.sourceforge.org/projects/doxygate
-
-
-
-CREDITS
-
-3rd party components and toolkits: 
-
-Qt Toolkit 4.4 by Nokia Trolltech (www.trolltech.com) 
-Free Qt components by Industrial Infosystems (www.ii-system.com) 
-
-3rd party tools: 
-
-GIMP graphic editor (www.gimp.org) 
-GCC compiler toolkit (gcc.gnu.org) 
-MinGW compiler toolkit (www.mingw.org) 
-Eclipse IDE (www.eclipse.org) 
-KDevelop IDE (www.kdevelop.org)
-Bytessence InstallMaker (www.bytessence.com)
-Notepad++ (notepad-plus.sourceforge.net)
-
-Other credits: 
-
-SourceForge (www.sourceforge.org) 
-Qt Apps (www.qt-apps.org)
-
+---
+	Rus
